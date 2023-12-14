@@ -28,4 +28,29 @@
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function (s) {};
+var isValid = function (s) {
+  const stack = [];
+  const pairs = {
+    ")": "(",
+    "}": "{",
+    "]": "[",
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    const char = s.charAt(i);
+
+    if (pairs[char]) {
+      if (stack.length === 0 || stack.pop() !== pairs[char]) {
+        return false;
+      }
+    } else {
+      stack.push(char);
+    }
+  }
+
+  return stack.length === 0;
+};
+
+console.log(isValid("()"));
+
+console.log(isValid("(]"));
